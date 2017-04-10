@@ -42,8 +42,6 @@ extern uint16_t now_uav_num;
 
 
 //设备类型定义，用于UAVID[3]
-
-#define DEVICE_NUMBER           0X0B
 #define DEVICE_TYPE_UDP         0X00
 #define DEVICE_TYPE_TEMPERATURE 0X01
 #define DEVICE_TYPE_OBSTACLE    0X02
@@ -57,6 +55,8 @@ extern uint16_t now_uav_num;
 #define DEVICE_TYPE_MEGAPHONE   0X0A
 #define DEVICE_TYPE_BATTERY     0X0B
 #define DEVICE_TYPE_BAOSHAN			0X0C
+#define DEVICE_TYPE_MULTICAMERA 0X0D
+#define DEVICE_NUMBER           DEVICE_TYPE_MULTICAMERA
 #define DEVICE_TYPE_HEART				101
 
 

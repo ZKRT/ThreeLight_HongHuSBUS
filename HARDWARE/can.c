@@ -44,7 +44,7 @@ uint8_t CAN_Mode_Init(uint8_t mode)
 	CAN_FilterInitStructure.CAN_FilterNumber=0;
 	CAN_FilterInitStructure.CAN_FilterMode=CAN_FilterMode_IdList; 
 	CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_32bit;
-	CAN_FilterInitStructure.CAN_FilterIdHigh=(DEVICE_TYPE_CAMERA<<5);
+	CAN_FilterInitStructure.CAN_FilterIdHigh=(DEVICE_TYPE_MULTICAMERA<<5);
 	CAN_FilterInitStructure.CAN_FilterIdLow=0x0000;
 	CAN_FilterInitStructure.CAN_FilterMaskIdHigh=0x0000;
 	CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;
@@ -118,7 +118,7 @@ uint8_t Can_Send_Msg(uint8_t* msg,uint8_t len)
   uint16_t i=0;
   CanTxMsg TxMessage;						  
 	
-	TxMessage.StdId=(DEVICE_TYPE_CAMERA<<4); 
+	TxMessage.StdId=(DEVICE_TYPE_MULTICAMERA<<4); 
   TxMessage.ExtId=0x00;				           
   TxMessage.IDE=CAN_Id_Standard;          
   TxMessage.RTR=CAN_RTR_Data;		         
@@ -166,17 +166,4 @@ uint8_t CAN1_send_message_fun(uint8_t *message, uint8_t len)
 	
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
