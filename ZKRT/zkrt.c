@@ -121,6 +121,8 @@ void zkrt_update_checksum(zkrt_packet_t* packet, uint8_t ch)
 	crc_accumulate(ch,&(crc));//如果直接传参crc_accumulate(ch,&(packet->crc));不可以，因为结构体成员的地址不能直接传参，这会导致hardfault错误
 	
 	packet->crc = crc;
+//	//zkrt_debug
+//	packet->crc = 0;
 }
 
 

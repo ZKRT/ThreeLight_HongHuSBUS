@@ -58,7 +58,7 @@ extern uint16_t now_uav_num;
 #define DEVICE_TYPE_MULTICAMERA 0X0D
 #define DEVICE_NUMBER           DEVICE_TYPE_MULTICAMERA
 #define DEVICE_TYPE_HEART				101
-
+#define DEVICE_SELF_TYPE        DEVICE_TYPE_MULTICAMERA
 
 //编号定义，用于UAVID[2：1]和UAVID[5：4]
 #define DEFAULT_NUM 0X00

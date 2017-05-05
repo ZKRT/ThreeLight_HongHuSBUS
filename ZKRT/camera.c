@@ -59,9 +59,12 @@ uint8_t can_value;
 
 //在子模块中，逐个字节的判断接收的数据，对zkrt指令解包，然后是设置的就设置完了返回响应，是读取的就读取完了返回值
 zkrt_packet_t sub_camera_zkrt_packet_can1_rx;
+
 uint8_t sub_camera_zkrt_recv_decode_and_zkrt_encode_ack(void)
 {
-	while (CAN1_rx_check() == 1)//check函数，通过buffer_get和buffer_store对比是否相等，来检验buffer里是否有数据。有数据返回1，无数据返回0
+	volatile uint8_t rx_enabled =0;
+	rx_enabled = CAN1_rx_check();
+	while (rx_enabled == 1)//check函数，通过buffer_get和buffer_store对比是否相等，来检验buffer里是否有数据。有数据返回1，无数据返回0
 	{
 		can_value = CAN1_rx_byte();//取得位于buffer_get位置上的数据
 		if (zkrt_decode_char(&sub_camera_zkrt_packet_can1_rx,can_value)==1)//每个字符都判断一下，当接收到完整的数据时返回1
@@ -87,6 +90,7 @@ uint8_t sub_camera_zkrt_recv_decode_and_zkrt_encode_ack(void)
 			
 			return 1;//解析成功了
 		}
+		rx_enabled = CAN1_rx_check();
 	}
 	
 	return 0;//没有最新的解析成功的操作

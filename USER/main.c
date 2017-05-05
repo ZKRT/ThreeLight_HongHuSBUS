@@ -20,7 +20,7 @@ void bsp_init(void)
 	sbus_init();
 }
 
-uint8_t status_camera[8] = {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, 0X04, 0X00, 0X00};
+uint8_t status_camera[8] = {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, DEVICE_SELF_TYPE, 0X00, 0X00};
 uint8_t three_paizhao_flag = 0;//用于记录三连拍的次数
 uint8_t paizhao_enabled = 0;
 
@@ -35,7 +35,7 @@ int main()
 			{
 				action_hangxiang();
 				action_fuyang();
-				
+				 
 				if(cmd_count - TimingDelay > _TIM_CMD_INTERNEL)  //在1秒内多次控制无效
 				{
 					cmd_count = TimingDelay;
@@ -166,13 +166,13 @@ int main()
 //		{
 //			if (tx_channel_in[IrJiaojuSw_cnyh] == IRZOOM_0X_VSBUS)
 //			{
-//				tx_channel_in[IrJiaojuSw_cnyh] = 1300;
+//				tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_2X_VSBUS;
 //			}
-//			else if (tx_channel_in[IrJiaojuSw_cnyh] == 1300)
+//			else if (tx_channel_in[IrJiaojuSw_cnyh] == IRZOOM_2X_VSBUS)
 //			{
-//				tx_channel_in[IrJiaojuSw_cnyh] = 1210;
+//				tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_4X_VSBUS;
 //			}
-//			else if (tx_channel_in[IrJiaojuSw_cnyh] == 1210)
+//			else if (tx_channel_in[IrJiaojuSw_cnyh] == IRZOOM_4X_VSBUS)
 //			{
 //				tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_0X_VSBUS;
 //			}			
