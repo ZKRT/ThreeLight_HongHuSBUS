@@ -157,7 +157,27 @@ void action_shexiang(void)
 		tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
 	}
 }
-//可见光焦距  //1000~2000 焦距渐扩
+////可见光焦距  //1000~2000 焦距渐扩
+//void action_jiaoju(void)
+//{
+//	int jiaoju_value;
+//	jiaoju_value = tx_channel_in[Jiaoju_cnyh];
+//	
+//	if ((last_zoomout != pwm_zoomout)&&(last_zoomin == pwm_zoomin)) 
+//	{
+//		jiaoju_value = jiaoju_value-100;	//周期范围是1000~2000，每次变化100，最多变化10次就到极限
+//		if((jiaoju_value) <=1000)
+//			jiaoju_value = 1000;
+//	}
+//	else if ((last_zoomout == pwm_zoomout)&&(last_zoomin != pwm_zoomin))
+//	{
+//		jiaoju_value = jiaoju_value+100;	//周期范围是1000~2000，每次变化100，最多变化10次就到极限
+//		if((jiaoju_value) >=2000)
+//			jiaoju_value = 2000;
+//	}
+//	tx_channel_in[Jiaoju_cnyh] = jiaoju_value;
+//}
+//可见光焦距  //1000~2000 焦距渐扩  调整渐扩为10
 void action_jiaoju(void)
 {
 	int jiaoju_value;
@@ -165,13 +185,13 @@ void action_jiaoju(void)
 	
 	if ((last_zoomout != pwm_zoomout)&&(last_zoomin == pwm_zoomin)) 
 	{
-		jiaoju_value = jiaoju_value-100;	//周期范围是1000~2000，每次变化100，最多变化10次就到极限
+		jiaoju_value = jiaoju_value-10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
 		if((jiaoju_value) <=1000)
 			jiaoju_value = 1000;
 	}
 	else if ((last_zoomout == pwm_zoomout)&&(last_zoomin != pwm_zoomin))
 	{
-		jiaoju_value = jiaoju_value+100;	//周期范围是1000~2000，每次变化100，最多变化10次就到极限
+		jiaoju_value = jiaoju_value+10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
 		if((jiaoju_value) >=2000)
 			jiaoju_value = 2000;
 	}
