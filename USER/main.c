@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "sbus.h"
 #include "uart.h"
+#include "key.h"
 
 void bsp_init(void)
 {
@@ -18,6 +19,9 @@ void bsp_init(void)
 	CAN_Mode_Init(CAN_Mode_Normal);//CAN初始化环回模式,波特率1Mbps    	
 	TIM_Init();
 	sbus_init();
+#ifdef KEY_TEST_FUN
+	KEY_Init();
+#endif
 }
 
 uint8_t status_camera[8] = {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, DEVICE_SELF_TYPE, 0X00, 0X00};
@@ -29,6 +33,9 @@ int main()
   bsp_init();
 	while (1)
 	{		
+#ifdef KEY_TEST_FUN
+		KEY_Rock();
+#endif		
 		if ((sub_camera_zkrt_recv_decode_and_zkrt_encode_ack()) == 1)
 		{
 			if (pwm_init_flag == 0)   	//初始化标记

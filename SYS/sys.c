@@ -85,6 +85,7 @@ volatile uint32_t led_rx_count = 0XFFFFFFFF;
 volatile uint32_t led_tx_count = 0XFFFFFFFF;
 volatile uint32_t _10ms_count = 0XFFFFFFFF;
 volatile uint32_t _10ms_flag = 0;
+volatile uint32_t _key_count = 0XFFFFFFFF;
 
 void delay_ms(uint16_t nms)						
 {

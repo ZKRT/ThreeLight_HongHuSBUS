@@ -177,25 +177,41 @@ void action_shexiang(void)
 //	}
 //	tx_channel_in[Jiaoju_cnyh] = jiaoju_value;
 //}
+////可见光焦距  //1000~2000 焦距渐扩  调整渐扩为10
+//void action_jiaoju(void)
+//{
+//	int jiaoju_value;
+//	jiaoju_value = tx_channel_in[Jiaoju_cnyh];
+//	
+//	if ((last_zoomout != pwm_zoomout)&&(last_zoomin == pwm_zoomin)) 
+//	{
+//		jiaoju_value = jiaoju_value-10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
+//		if((jiaoju_value) <=1000)
+//			jiaoju_value = 1000;
+//	}
+//	else if ((last_zoomout == pwm_zoomout)&&(last_zoomin != pwm_zoomin))
+//	{
+//		jiaoju_value = jiaoju_value+10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
+//		if((jiaoju_value) >=2000)
+//			jiaoju_value = 2000;
+//	}
+//	tx_channel_in[Jiaoju_cnyh] = jiaoju_value;
+//}
+const uint16_t zoom_value[8] = {1000, 1010, 1020, 1040, 1100, 1200, 1600, 2000};
+int zoom_item =0;
 //可见光焦距  //1000~2000 焦距渐扩  调整渐扩为10
 void action_jiaoju(void)
 {
-	int jiaoju_value;
-	jiaoju_value = tx_channel_in[Jiaoju_cnyh];
+	if ((last_zoomout != pwm_zoomout)&&(last_zoomin == pwm_zoomin)) //缩小
+	{
+		zoom_item = (zoom_item -1) >=0? (zoom_item -1): 0;
+	}
+	else if ((last_zoomout == pwm_zoomout)&&(last_zoomin != pwm_zoomin)) //放大
+	{
+		zoom_item = (zoom_item +1) <=7? (zoom_item +1): 7;
+	}
 	
-	if ((last_zoomout != pwm_zoomout)&&(last_zoomin == pwm_zoomin)) 
-	{
-		jiaoju_value = jiaoju_value-10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
-		if((jiaoju_value) <=1000)
-			jiaoju_value = 1000;
-	}
-	else if ((last_zoomout == pwm_zoomout)&&(last_zoomin != pwm_zoomin))
-	{
-		jiaoju_value = jiaoju_value+10;	//周期范围是1000~2000，每次变化10，最多变化100次就到极限
-		if((jiaoju_value) >=2000)
-			jiaoju_value = 2000;
-	}
-	tx_channel_in[Jiaoju_cnyh] = jiaoju_value;
+	tx_channel_in[Jiaoju_cnyh] = zoom_value[zoom_item];
 }
 //视频切换
 void action_vediosw(void)
@@ -286,32 +302,49 @@ void action_irvideorec(void)
 		tx_channel_in[IrVedioRecord_cnyh] = 1100;
 	}
 }	
+////红外焦距 1210-4x, 1300-2x , 1600-0x
+//const uint16_t irzoom_value[3] = {IRZOOM_0X_VSBUS, IRZOOM_2X_VSBUS, IRZOOM_4X_VSBUS};
+//void action_irjiaoju(void)
+//{
+//	uint16_t jiaoju_value;
+//	int irzoom_item;
+//	
+//	jiaoju_value = tx_channel_in[IrJiaojuSw_cnyh];
+//	
+//	if(jiaoju_value == irzoom_value[0])
+//	{
+//		irzoom_item = 0;
+//	}
+//  else if(jiaoju_value == irzoom_value[1])
+//	{
+//		irzoom_item = 1;
+//	}
+////  if(jiaoju_value == irzoom_value[2])  //this is a bug
+//	else if(jiaoju_value == irzoom_value[2]) 	//modify by yanly 
+//	{
+//		 irzoom_item = 2;
+//	}
+//	else
+//	{
+//		irzoom_item = 0;
+//	}	
+//	
+//	if ((last_ir_zoomout != pwm_ir_zoomout)&&(last_ir_zoomin == pwm_ir_zoomin)) //缩小
+//	{
+//		irzoom_item = (irzoom_item -1) >=0? (irzoom_item -1): 0;
+//	}
+//	else if ((last_ir_zoomout == pwm_ir_zoomout)&&(last_ir_zoomin != pwm_ir_zoomin)) //放大
+//	{
+//		irzoom_item = (irzoom_item +1) <=2? (irzoom_item +1): 2;
+//	}
+//	
+//	tx_channel_in[IrJiaojuSw_cnyh] = irzoom_value[irzoom_item];
+//}
 //红外焦距 1210-4x, 1300-2x , 1600-0x
 const uint16_t irzoom_value[3] = {IRZOOM_0X_VSBUS, IRZOOM_2X_VSBUS, IRZOOM_4X_VSBUS};
+int irzoom_item =0;
 void action_irjiaoju(void)
 {
-	uint16_t jiaoju_value;
-	int irzoom_item;
-	
-	jiaoju_value = tx_channel_in[IrJiaojuSw_cnyh];
-	
-	if(jiaoju_value == irzoom_value[0])
-	{
-		irzoom_item = 0;
-	}
-  else if(jiaoju_value == irzoom_value[1])
-	{
-		irzoom_item = 1;
-	}
-  if(jiaoju_value == irzoom_value[2])
-	{
-		 irzoom_item = 2;
-	}
-	else
-	{
-		irzoom_item = 0;
-	}	
-	
 	if ((last_ir_zoomout != pwm_ir_zoomout)&&(last_ir_zoomin == pwm_ir_zoomin)) //缩小
 	{
 		irzoom_item = (irzoom_item -1) >=0? (irzoom_item -1): 0;
