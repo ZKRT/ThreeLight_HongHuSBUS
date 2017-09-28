@@ -47,32 +47,32 @@ int main()
 				{
 					cmd_count = TimingDelay;
 					
-					if(last_paizhao != pwm_paizhao)
-					{
-						paizhao_enabled = 1;
-						pic_return_count = TimingDelay;                   //需回位
-						action_paizhao();
-					}
+//					if(last_paizhao != pwm_paizhao)
+//					{
+//						paizhao_enabled = 1;
+//						pic_return_count = TimingDelay;                   //需回位
+//						action_paizhao();
+//					}
 					
-					if(last_shexiang != pwm_shexiang)
-					{
-						action_shexiang();
-					}	
+//					if(last_shexiang != pwm_shexiang)
+//					{
+//						action_shexiang();
+//					}	
 					
-					if(((last_zoomout != pwm_zoomout)||(last_zoomin != pwm_zoomin)))
-					{
+//					if(((last_zoomout != pwm_zoomout)||(last_zoomin != pwm_zoomin)))
+//					{
 						action_jiaoju();
-					}
+//					}
 					
-					if(last_vediosw != pwm_vedio_sw)
-					{
-						action_vediosw();
-					}
+//					if(last_vediosw != pwm_vedio_sw)
+//					{
+//						action_vediosw();
+//					}
 					
-					if(last_colorsw != pwm_color_sw)
-					{
-						action_ircolorsw();
-					}
+//					if(last_colorsw != pwm_color_sw)
+//					{
+//						action_ircolorsw();
+//					}
 					
 					if(last_modesw != pwm_mode_sw)
 					{
@@ -85,25 +85,34 @@ int main()
 						action_daynightsw();
 					}
 					
-					if(last_mirrorflip_sw != pwm_mirrorflip_sw)
+//					if(last_mirrorflip_sw != pwm_mirrorflip_sw)
+//					{
+////						mirrorflip_return_count = TimingDelay;
+//						action_mirrorflipsw();
+//					}
+					
+//					if(last_irrec_sw != pwm_irrec_sw)
+//					{
+//						action_irvideorec();
+//					}					
+					
+//					if(((last_ir_zoomout != pwm_ir_zoomout)||(last_ir_zoomin != pwm_ir_zoomin)))
+//					{
+//						action_irjiaoju();
+//					}
+					
+					if(last_GyroCalibration != pwm_GyroCalibration)
 					{
-//						mirrorflip_return_count = TimingDelay;
-						action_mirrorflipsw();
+						action_GyroCalibration();
+						paizhao_enabled = 1; 
+						pic_return_count = TimingDelay;                   //需回位						
 					}
 					
-					if(last_irrec_sw != pwm_irrec_sw)
-					{
-						action_irvideorec();
-					}					
-					
-					if(((last_ir_zoomout != pwm_ir_zoomout)||(last_ir_zoomin != pwm_ir_zoomin)))
-					{
-						action_irjiaoju();
-					}
+					action_Defog();
+					action_ElectricImageStabilizing();
 	
-				}	
+				}
 			}
-			
 			//不管有没有初始化过，都要在处理完事后记录上一次操作
 			last_paizhao = pwm_paizhao;  		  
 			last_shexiang = pwm_shexiang;   	 
@@ -117,7 +126,7 @@ int main()
 			last_irrec_sw = pwm_irrec_sw;
 			last_ir_zoomout = pwm_ir_zoomout;
 			last_ir_zoomin = pwm_ir_zoomin;
-			
+			last_GyroCalibration = pwm_GyroCalibration;
 		}
 		
 		if (_10ms_count - TimingDelay >= 10)								
@@ -163,7 +172,7 @@ int main()
 		{
 			if (pic_return_count - TimingDelay > _TIM_RETURN)
 			{
-				tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
+				tx_channel_in[GyroCalibration_cnyh] = 1100;
 				pic_return_count = TimingDelay;
 				paizhao_enabled = 0;
 			}

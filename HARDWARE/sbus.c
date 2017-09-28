@@ -113,16 +113,26 @@ uint8_t sbus_recv(void)
 
 void sbus_init(void)
 {
-	USART1_Config();
+	USART1_Config();	
+	/*honghu init value*/
+//	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
+//	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
+//	tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;       //ok, 1900录像，1510无动作，1100拍照
+//	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 1510跟随，1900锁头，1100回中
+//	tx_channel_in[IrColorSw_cnyh] = 1100;                      //ok, 1510以下黑热，1520以上白热，1515铁红
+//	tx_channel_in[MirrorFlip_cnyh] = 1510;                     //ok, 1510 与1100 切换
+//	tx_channel_in[Jiaoju_cnyh] = 1000;                         //ok, 1000~2000渐扩大焦距
+//	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
+//	tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_0X_VSBUS;          //ok, 1210-4x, 1300-2x , 1600-0x
+//	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜
 	
+	/*yunhan init value*/
 	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
 	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
-	tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;       //ok, 1900录像，1510无动作，1100拍照
-	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 1510跟随，1900锁头，1100回中
-	tx_channel_in[IrColorSw_cnyh] = 1100;                      //ok, 1510以下黑热，1520以上白热，1515铁红
-	tx_channel_in[MirrorFlip_cnyh] = 1510;                     //ok, 1510 与1100 切换
-	tx_channel_in[Jiaoju_cnyh] = 1000;                         //ok, 1000~2000渐扩大焦距
-	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
-	tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_0X_VSBUS;          //ok, 1210-4x, 1300-2x , 1600-0x
-	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜
+	tx_channel_in[Jiaoju_cnyh] = 1500;                         //ok
+	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 低无增益，中高增益，高黑白夜视
+	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 低自稳，高跟随
+	tx_channel_in[GyroCalibration_cnyh] = 1100;                //1100, 低档至高档触发
+	tx_channel_in[Defog_cnyh] = 1100;                          //低关，高开
+	tx_channel_in[ElectricImageStabilizing_cnyh] = 1100;	     //低关，高开
 }
