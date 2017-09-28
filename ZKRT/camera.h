@@ -58,8 +58,9 @@ extern uint8_t last_mirrorflip_sw;
 extern uint8_t last_irrec_sw;
 extern uint8_t last_ir_zoomout;
 extern uint8_t last_ir_zoomin;
-extern uint8_t last_zoomout;
+extern uint16_t last_zoomout;
 extern uint8_t last_zoomin;		
+extern uint8_t last_GyroCalibration;
 
 extern uint16_t pwm_hangxiang;	//通道1，航向
 extern uint16_t pwm_fuyang;			//通道2，俯仰
@@ -77,8 +78,11 @@ extern uint8_t	pwm_mirrorflip_sw;
 extern uint8_t	pwm_irrec_sw;
 extern uint8_t	pwm_ir_zoomout;
 extern uint8_t	pwm_ir_zoomin;
-extern uint8_t pwm_zoomout;
+extern uint16_t pwm_zoomout;
 extern uint8_t pwm_zoomin;		
+extern uint8_t pwm_GyroCalibration;
+extern uint8_t pwm_Defog;
+extern uint8_t pwm_ElectricImageStabilizing;
 //extern uint8_t pwm_three_paizhao;//字节28，三连拍
 extern uint8_t pwm_init_flag; 	//字节29，初始化标识
 
@@ -96,6 +100,9 @@ void action_daynightsw(void);
 void action_mirrorflipsw(void);
 void action_irvideorec(void);
 void action_irjiaoju(void);
+void action_GyroCalibration(void);
+void action_Defog(void);
+void action_ElectricImageStabilizing(void);
 
 #endif
 

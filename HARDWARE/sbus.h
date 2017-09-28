@@ -12,20 +12,34 @@
 #define IRZOOM_2X_VSBUS     1200 //1210
 #define IRZOOM_4X_VSBUS     1550 //1300
 
-enum Channel_num_threelight   //for honghu
+//enum Channel_num_threelight   //for honghu
+//{
+//	Yaw_cnyh = 0, 
+//	Pitch_cnyh, 
+//	None3_cnyh,
+//	None4_cnyh,
+//	VedioRecPic_cnyh,
+//	ModeSw_cnyh, 
+//	IrColorSw_cnyh,
+//	MirrorFlip_cnyh,
+//	Jiaoju_cnyh,
+//	IrVedioRecord_cnyh,
+//	IrJiaojuSw_cnyh,
+//	DayNightSw_cnyh
+//};
+
+enum Channel_num_threelight   //for yunhan
 {
 	Yaw_cnyh = 0, 
 	Pitch_cnyh, 
 	None3_cnyh,
+	Jiaoju_cnyh,	
+	DayNightSw_cnyh,
+	ModeSw_cnyh,
+	GyroCalibration_cnyh,
 	None4_cnyh,
-	VedioRecPic_cnyh,
-	ModeSw_cnyh, 
-	IrColorSw_cnyh,
-	MirrorFlip_cnyh,
-	Jiaoju_cnyh,
-	IrVedioRecord_cnyh,
-	IrJiaojuSw_cnyh,
-	DayNightSw_cnyh
+	Defog_cnyh,
+	ElectricImageStabilizing_cnyh
 };
 
 #pragma pack(push, 1)
