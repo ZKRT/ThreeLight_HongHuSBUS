@@ -28,7 +28,7 @@ void USART1_Config(void)
 	
 	/* USART1 mode config */
 	USART_InitStructure.USART_BaudRate = 100000;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_WordLength = USART_WordLength_9b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_2;
 	USART_InitStructure.USART_Parity = USART_Parity_Even;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
