@@ -72,36 +72,14 @@ void KEY_Rock(void)
 	switch(key_value)
 	{
 		case KEY1_PRES:
-//	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
-//	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
-//	tx_channel_in[Jiaoju_cnyh] = 1000;                         //ok
-//	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 低无增益，中高增益，高黑白夜视
-//	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 低自稳，高跟随
-//	tx_channel_in[GyroCalibration_cnyh] = 1100;                //1100, 低档至高档触发
-//	tx_channel_in[Defog_cnyh] = 1100;                          //低关，高开
-//	tx_channel_in[ElectricImageStabilizing_cnyh] = 1100;	     //低关，高开
-		
-//			pwm_zoomout++;
-//			pwm_ir_zoomout++;
-//			action_jiaoju();
-//			action_irjiaoju();
-//			last_zoomout = pwm_zoomout;   
-//			last_zoomin = pwm_zoomin;   
-//			last_ir_zoomout = pwm_ir_zoomout;
-//			last_ir_zoomin = pwm_ir_zoomin;
+//			action_mirrorflipsw();
+//			tx_channel_in[VedioRecPic_cnyh] = 1100;
 			break;
 		case KEY2_PRES:
-
-//			pwm_zoomin++;
-//			pwm_ir_zoomin++;			
-//			action_jiaoju();
-//			action_irjiaoju();
-//			last_zoomout = pwm_zoomout;   
-//			last_zoomin = pwm_zoomin;   	
-//			last_ir_zoomout = pwm_ir_zoomout;
-//			last_ir_zoomin = pwm_ir_zoomin;
+//			tx_channel_in[VedioRecPic_cnyh] = 850;
 			break;
-		case KEY3_PRES:
+		case KEY3_PRES:		
+//			tx_channel_in[VedioRecPic_cnyh] = 1510;
 			break;
 	}
 }

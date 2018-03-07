@@ -6,12 +6,9 @@
 zkrt_sbus  tx_sbus;
 zkrt_sbus  rx_sbus;
 
-
-
 ////////px4
 #define SBUS_FRAME_SIZE			25
 #define SBUS_BUFFER_SIZE		(SBUS_FRAME_SIZE + SBUS_FRAME_SIZE / 2)
-
 
 #define SBUS_START_SYMBOL	0x0f
 
@@ -77,7 +74,6 @@ void delaytemp(uint32_t t)
 		}
 	}
 }
-
 //被调用情况：已经将所需的pwm值输入到channel_in里
 //用于将通道值整理到tx_sbus里
 uint8_t endbytecounter=0;
@@ -172,8 +168,6 @@ uint8_t tempdata[3]={0x00,0x00,0x00};
 //	/*end buy Harry*/
 //	return 0;
 //}
-
-
 void
 sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 {
@@ -208,7 +202,6 @@ sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 	
 	uart1_send(oframe, SBUS_FRAME_SIZE);
 }
-
 uint8_t  sbus_send(void)
 {
 	sbus1_output(0, tx_channel_in, 16);
@@ -258,7 +251,6 @@ uint8_t sbus_recv(void)
 	
 	return 0;
 }
-
 void sbus_init(void)
 {
 	USART1_Config();	
@@ -273,14 +265,14 @@ void sbus_init(void)
 //	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
 //	tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_0X_VSBUS;          //ok, 1210-4x, 1300-2x , 1600-0x
 //	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜
-	
-	/*yunhan init value*/
 	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
 	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
-	tx_channel_in[Jiaoju_cnyh] = 1500;                         //ok
-	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 低无增益，中高增益，高黑白夜视
-	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 低自稳，高跟随
-	tx_channel_in[GyroCalibration_cnyh] = 1100;                //1100, 低档至高档触发
-	tx_channel_in[Defog_cnyh] = 1100;                          //低关，高开
-	tx_channel_in[ElectricImageStabilizing_cnyh] = 1100;	     //低关，高开
+	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 1510跟随，1900锁头，1100回中
+	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜	
+	tx_channel_in[MirrorFlip_cnyh] = 1900;                     //ok, 1900 与1500 切换
+	tx_channel_in[IrColorSw_cnyh] = 1100;                      //ok, 1100黑热，1510白热，1600铁红
+	tx_channel_in[Jiaoju_cnyh] = 850;                         //ok, 850~2150渐扩大焦距
+	tx_channel_in[IrJiaojuSw_cnyh] = 850;                     //ok, 850-0x, 1000~2000-2x , 2150-4x
+	tx_channel_in[VedioRecPic_cnyh] = 1510;                   //ok, 1900录像，1510无动作，1100拍照
+	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
 }

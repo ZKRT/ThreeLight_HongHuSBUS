@@ -599,6 +599,21 @@
               <FileType>5</FileType>
               <FilePath>..\ZKRT\camera.h</FilePath>
             </File>
+            <File>
+              <FileName>appcan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ZKRT\appcan.c</FilePath>
+            </File>
+            <File>
+              <FileName>appcan.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ZKRT\appcan.h</FilePath>
+            </File>
+            <File>
+              <FileName>appprotocol.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ZKRT\appprotocol.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
