@@ -8,7 +8,7 @@
 #define PIC_VSBUS           1100
 #define REC_VSBUS           1900
 #define CAMERA_NONE_VSBUS   1510
-#define IRZOOM_0X_VSBUS     1100 //1600  //zkrt_debug
+#define IRZOOM_0X_VSBUS     1100 //1600 
 #define IRZOOM_2X_VSBUS     1200 //1210
 #define IRZOOM_4X_VSBUS     1550 //1300
 

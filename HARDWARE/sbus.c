@@ -6,12 +6,9 @@
 zkrt_sbus  tx_sbus;
 zkrt_sbus  rx_sbus;
 
-
-
 ////////px4
 #define SBUS_FRAME_SIZE			25
 #define SBUS_BUFFER_SIZE		(SBUS_FRAME_SIZE + SBUS_FRAME_SIZE / 2)
-
 
 #define SBUS_START_SYMBOL	0x0f
 
@@ -77,7 +74,6 @@ void delaytemp(uint32_t t)
 		}
 	}
 }
-
 //被调用情况：已经将所需的pwm值输入到channel_in里
 //用于将通道值整理到tx_sbus里
 uint8_t endbytecounter=0;
@@ -172,8 +168,6 @@ uint8_t tempdata[3]={0x00,0x00,0x00};
 //	/*end buy Harry*/
 //	return 0;
 //}
-
-
 void
 sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 {
@@ -208,7 +202,6 @@ sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 	
 	uart1_send(oframe, SBUS_FRAME_SIZE);
 }
-
 uint8_t  sbus_send(void)
 {
 	sbus1_output(0, tx_channel_in, 16);
@@ -258,7 +251,6 @@ uint8_t sbus_recv(void)
 	
 	return 0;
 }
-
 void sbus_init(void)
 {
 	USART1_Config();	
