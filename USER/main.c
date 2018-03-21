@@ -27,14 +27,14 @@ void bsp_init(void)
 
 int main()
 {
-  bsp_init();
+	bsp_init();
 	appcan_init();
 	while (1)
 	{	
 #ifdef KEY_TEST_FUN
 		KEY_Rock();
 #endif		
-		camera_standby();
+//		camera_standby();
 		appcan_prcs();
 		action_reset_prcs();
 		if (_10ms_count - TimingDelay >= 10)								

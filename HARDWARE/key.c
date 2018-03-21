@@ -72,14 +72,10 @@ void KEY_Rock(void)
 	switch(key_value)
 	{
 		case KEY1_PRES:
-//			action_mirrorflipsw();
-//			tx_channel_in[VedioRecPic_cnyh] = 1100;
 			break;
 		case KEY2_PRES:
-//			tx_channel_in[VedioRecPic_cnyh] = 850;
 			break;
-		case KEY3_PRES:		
-//			tx_channel_in[VedioRecPic_cnyh] = 1510;
+		case KEY3_PRES: 
 			break;
 	}
 }

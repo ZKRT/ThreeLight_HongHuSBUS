@@ -186,9 +186,8 @@ static u8 normal_data_handle(const zkrt_packet_t *spacket)
 	if(runtime_ctrl.init_status != CTRL_INIT_ENABLE)
 	{//control handle
 		tx_channel_in[Yaw_cnyh] = runtime_ctrl.yaw;
-		tx_channel_in[Pitch_cnyh] = 3000-runtime_ctrl.pitch;
+		tx_channel_in[Pitch_cnyh] = runtime_ctrl.pitch;
 		tx_channel_in[Jiaoju_cnyh] = runtime_ctrl.zoom;
-		tx_channel_in[IrJiaojuSw_cnyh] = runtime_ctrl.ir_zoom;
 		if(cmd_count - TimingDelay > _TIM_CMD_INTERNEL)  //在1秒内多次控制无效
 		{
 			cmd_count = TimingDelay;
@@ -200,27 +199,11 @@ static u8 normal_data_handle(const zkrt_packet_t *spacket)
 			if(runtime_ctrl.record!=last_ctrl.record)
 			{
 				action_shexiang();
-			}
-			if(runtime_ctrl.color!=last_ctrl.color)
-			{
-				action_ircolorsw();
-			}
-			if(runtime_ctrl.daynight!=last_ctrl.daynight)
-			{
-				action_daynightsw();
-			}
+			}			
 			if(runtime_ctrl.gimbal_mode!=last_ctrl.gimbal_mode)
 			{
 				action_modesw();
-			}			
-			if(runtime_ctrl.ir_record!=last_ctrl.ir_record)
-			{
-				action_irvideorec();
-			}		
-			if(runtime_ctrl.mirrorflip!=last_ctrl.mirrorflip)
-			{
-				action_mirrorflipsw();
-			}					
+			}
 		}
 	}
 	//mask last ctrl

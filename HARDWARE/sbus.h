@@ -12,21 +12,33 @@
 #define IRZOOM_2X_VSBUS     2000 
 #define IRZOOM_4X_VSBUS     2150
 
-enum Channel_num_threelight   //for honghu
+enum Channel_num_threelight   //for skyeye-20e
 {
 	Yaw_cnyh = 0, 
 	Pitch_cnyh, 
 	None3_cnyh,
 	None4_cnyh,
-	VedioRecPic_cnyh,
-	ModeSw_cnyh, 
-	IrColorSw_cnyh,
-	MirrorFlip_cnyh,
+	Pic_cnyh,
+	VedioRec_cnyh,
 	Jiaoju_cnyh,
-	IrVedioRecord_cnyh,
-	IrJiaojuSw_cnyh,
-	DayNightSw_cnyh
+	ModeSw_cnyh
 };
+
+//enum Channel_num_threelight   //for honghu
+//{
+//	Yaw_cnyh = 0, 
+//	Pitch_cnyh, 
+//	None3_cnyh,
+//	None4_cnyh,
+//	VedioRecPic_cnyh,
+//	ModeSw_cnyh, 
+//	IrColorSw_cnyh,
+//	MirrorFlip_cnyh,
+//	Jiaoju_cnyh,
+//	IrVedioRecord_cnyh,
+//	IrJiaojuSw_cnyh,
+//	DayNightSw_cnyh
+//};
 
 //enum Channel_num_threelight   //for yunhan
 //{

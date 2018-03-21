@@ -22,7 +22,7 @@
 /* Exported macro ------------------------------------------------------------*/
 
 //version and model string
-#define DEV_MODEL              "M-TI"
+#define DEV_MODEL              "M-SKY20E"  //ZKRT_NOTICE: MUST BE CHANGE
 #define DEV_HW                 "010000"
 #define DEV_SW                 "010000"
 //

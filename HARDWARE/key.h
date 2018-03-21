@@ -8,7 +8,7 @@
 #define KEY3_PRES	 3
 
 //add by yanly
-//#define KEY_TEST_FUN		1   //按键测试吊舱控制接口
+//#define KEY_TEST_FUN		1   //按键测试吊舱控制接口 //zkrt_debug
 
 #ifdef KEY_TEST_FUN
 void KEY_Init(void);
