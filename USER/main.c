@@ -12,8 +12,6 @@
 
 void bsp_init(void)
 {
-	SystemInit();		/*系统初始化*/
-	RCC_Configuration();
 	SysTick_Init();
 	LED_Init();
 	ADC1_Init();
@@ -25,6 +23,7 @@ void bsp_init(void)
 #endif
 }
 
+uint8_t status_camera[8] = {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, DEVICE_TYPE_SELF, 0X00, 0X00};
 int main()
 {
 	bsp_init();
@@ -34,7 +33,6 @@ int main()
 #ifdef KEY_TEST_FUN
 		KEY_Rock();
 #endif		
-//		camera_standby();
 		appcan_prcs();
 		action_reset_prcs();
 		if (_10ms_count - TimingDelay >= 10)								
@@ -54,7 +52,12 @@ int main()
 			{
 				if (MAVLINK_TX_INIT_VAL - TimingDelay > 3000)	
 				{
-					appcan_hbpacket_send();
+					status_camera[7]++;
+					if (status_camera[7] == 0XFF)
+					{
+						status_camera[7] = 0;
+					}
+					Can_Send_Msg(status_camera, 8);							
 				}
 			}
 			_10ms_flag++;

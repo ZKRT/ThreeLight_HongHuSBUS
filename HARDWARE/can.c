@@ -113,57 +113,81 @@ uint8_t CAN1_rx_byte(void)
 //msg:数据指针,最大为8个字节.
 //返回值:0,成功;其他,失败;
 uint8_t Can_Send_Msg(uint8_t* msg,uint8_t len)
-{	
+{
+	uint8_t status;
   uint8_t mbox;
   uint16_t i=0;
-  CanTxMsg TxMessage;						  
+  CanTxMsg TxMessage;
 	
-	TxMessage.StdId=(DEVICE_TYPE_SELF<<4); 
-  TxMessage.ExtId=0x00;				           
+//pack data	
+  TxMessage.StdId=(DEVICE_TYPE_SELF<<4);   
+  TxMessage.ExtId=0x00;				             
   TxMessage.IDE=CAN_Id_Standard;          
   TxMessage.RTR=CAN_RTR_Data;		         
-  TxMessage.DLC=len;						      
+  TxMessage.DLC=len;						          
   for(i=0;i<len;i++)
-	TxMessage.Data[i]=msg[i];             
-  
-	mbox= CAN_Transmit(CAN, &TxMessage);   
-	
-  i=0;
-  while((CAN_TransmitStatus(CAN, mbox)==CAN_TxStatus_Failed)&&(i<0XFFF))i++;	
-	
-  if(i>=0XFFF)
-	{
-		CAN_Mode_Init(CAN_Mode_Normal);
-		return 1;
-  }
+		TxMessage.Data[i]=msg[i];
 	
 	GPIO_ResetBits(GPIOB, GPIO_Pin_6);
 	led_tx_count = TimingDelay;
 	
-	return 0;	
-
+//transmit	
+	i=0;
+	mbox= CAN_Transmit(CAN, &TxMessage); 
+	while((mbox==CAN_TxStatus_NoMailBox)&&(i<0x4FFF))
+	{
+		i++;
+		mbox= CAN_Transmit(CAN, &TxMessage); 
+	}	
+	if(mbox==CAN_TxStatus_NoMailBox)
+	{
+		return 1;
+	}	
+//check transmitstatus	
+  i=0;
+	status = CAN_TransmitStatus(CAN, mbox);
+	while((status!=CAN_TxStatus_Ok)&&(i<0x4FFF))
+	{
+		i++;
+		status = CAN_TransmitStatus(CAN, mbox);
+	}	
+  if(i>=0x4FFF)
+	{
+		if(status == CAN_TxStatus_Pending)
+		{
+//			printf("can mbox[%d] CAN_TxStatus_Pending\n", mbox);
+		}
+		else if(status == CAN_TxStatus_Failed)
+		{
+			CAN_Mode_Init(CAN_Mode_Normal);
+//			printf("can mbox[%d] CAN_TxStatus_Failed\n", mbox);
+			return 1;
+		}
+  }
+	
+	return 0;		//成功返回
 }
-
 //将子模块的数据返回给管理模块
 uint8_t CAN1_send_message_fun(uint8_t *message, uint8_t len)
 {
-	uint8_t count;		   
+	//假设一共50个字
+	uint8_t count;		             
 	uint8_t time;
+	uint8_t ret;
 	
-	time = len/8;          
+	time = len/8;           
 	
 	for (count = 0; count < time; count++)
 	{
-		Can_Send_Msg(message, 8);
+		ret = Can_Send_Msg(message, 8);
+		if(ret)
+			return ret;
 		message += 8;
-		delay_us(999);
 	}
-	if (len%8)       
+	if (len%8)                         
 	{
-		Can_Send_Msg(message, len%8);
-		delay_us(999);
+		ret = Can_Send_Msg(message, len%8);
 	}
-	
-	return 0;
+	return ret;
 }
 

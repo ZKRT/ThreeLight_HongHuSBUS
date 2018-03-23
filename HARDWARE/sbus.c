@@ -259,5 +259,5 @@ void sbus_init(void)
 	tx_channel_in[Pic_cnyh] = 1100; 
 	tx_channel_in[VedioRec_cnyh] = 1100;
 	tx_channel_in[Jiaoju_cnyh] = 1500; 
-	tx_channel_in[ModeSw_cnyh] = 1100;
+	tx_channel_in[ModeSw_cnyh] = 1900;
 }

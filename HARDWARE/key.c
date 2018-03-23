@@ -75,7 +75,7 @@ void KEY_Rock(void)
 			break;
 		case KEY2_PRES:
 			break;
-		case KEY3_PRES: 
+		case KEY3_PRES:
 			break;
 	}
 }
