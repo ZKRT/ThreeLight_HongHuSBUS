@@ -8,18 +8,17 @@
 #define PIC_VSBUS           1100
 #define REC_VSBUS           1900
 #define CAMERA_NONE_VSBUS   1510
-#define IRZOOM_0X_VSBUS     850 
-#define IRZOOM_2X_VSBUS     2000 
+#define IRZOOM_0X_VSBUS     850
+#define IRZOOM_2X_VSBUS     2000
 #define IRZOOM_4X_VSBUS     2150
 
-enum Channel_num_threelight   //for honghu
-{
-	Yaw_cnyh = 0, 
-	Pitch_cnyh, 
+enum Channel_num_threelight { //for honghu
+	Yaw_cnyh = 0,
+	Pitch_cnyh,
 	None3_cnyh,
 	None4_cnyh,
 	VedioRecPic_cnyh,
-	ModeSw_cnyh, 
+	ModeSw_cnyh,
 	IrColorSw_cnyh,
 	MirrorFlip_cnyh,
 	Jiaoju_cnyh,
@@ -30,10 +29,10 @@ enum Channel_num_threelight   //for honghu
 
 //enum Channel_num_threelight   //for yunhan
 //{
-//	Yaw_cnyh = 0, 
-//	Pitch_cnyh, 
+//	Yaw_cnyh = 0,
+//	Pitch_cnyh,
 //	None3_cnyh,
-//	Jiaoju_cnyh,	
+//	Jiaoju_cnyh,
 //	DayNightSw_cnyh,
 //	ModeSw_cnyh,
 //	GyroCalibration_cnyh,
@@ -43,8 +42,7 @@ enum Channel_num_threelight   //for honghu
 //};
 
 #pragma pack(push, 1)
-typedef struct _zkrt_sbus
-{
+typedef struct _zkrt_sbus {
 	uint8_t   startbyte;
 	uint8_t   data[22];
 	uint8_t   flags;
@@ -66,5 +64,5 @@ uint8_t sbus_send(void);
 uint8_t sbus_recv(void);
 void sbus_init(void);
 
-#endif 
+#endif
 

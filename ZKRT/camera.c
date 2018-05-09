@@ -13,7 +13,7 @@ uint8_t paizhao_enabled = 0;
 //////////////////////////////////////////////////////////////////////////////////
 //void action_hangxiang(void)
 //{
-//	if (pwm_hangxiang > 1500)  
+//	if (pwm_hangxiang > 1500)
 //	{
 //		tx_channel_in[Yaw_cnyh] = pwm_hangxiang;
 //	}
@@ -44,134 +44,93 @@ uint8_t paizhao_enabled = 0;
 //}
 //1900录像，1510无动作，1100拍照
 //可见光拍照 //控制完成需要回位
-void action_paizhao(void)
-{
-	if (tx_channel_in[VedioRecPic_cnyh] == CAMERA_NONE_VSBUS)
-	{
+void action_paizhao(void) {
+	if (tx_channel_in[VedioRecPic_cnyh] == CAMERA_NONE_VSBUS) {
 		tx_channel_in[VedioRecPic_cnyh] = 1100;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
 	}
 }
 //可见光录像
-void action_shexiang(void)
-{
-	if (tx_channel_in[VedioRecPic_cnyh] == CAMERA_NONE_VSBUS)
-	{
+void action_shexiang(void) {
+	if (tx_channel_in[VedioRecPic_cnyh] == CAMERA_NONE_VSBUS) {
 		tx_channel_in[VedioRecPic_cnyh] = 1900;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
 	}
 }
 //红外颜色切换 1510以下黑热，1520以上白热，1515铁红
-void action_ircolorsw(void)
-{
-	if (tx_channel_in[IrColorSw_cnyh] == 1100)
-	{
+void action_ircolorsw(void) {
+	if (tx_channel_in[IrColorSw_cnyh] == 1100) {
 		tx_channel_in[IrColorSw_cnyh] = 1510;
-	}
-	else if (tx_channel_in[IrColorSw_cnyh] == 1510)
-	{
+	} else if (tx_channel_in[IrColorSw_cnyh] == 1510) {
 		tx_channel_in[IrColorSw_cnyh] = 1600;
-	}	
-	else if (tx_channel_in[IrColorSw_cnyh] == 1600)
-	{
+	} else if (tx_channel_in[IrColorSw_cnyh] == 1600) {
 		tx_channel_in[IrColorSw_cnyh] = 1100;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[IrColorSw_cnyh] = 1100;
 	}
 }
 
 //云台模式切换  低自稳，高跟随
-void action_modesw(void)
-{
-	if (tx_channel_in[ModeSw_cnyh] == 1100)
-	{
+void action_modesw(void) {
+	if (tx_channel_in[ModeSw_cnyh] == 1100) {
 		tx_channel_in[ModeSw_cnyh] = 1900;
-	}
-	else if (tx_channel_in[ModeSw_cnyh] == 1900)
-	{
+	} else if (tx_channel_in[ModeSw_cnyh] == 1900) {
 		tx_channel_in[ModeSw_cnyh] = 1500;
-	}
-	else if (tx_channel_in[ModeSw_cnyh] == 1500)
-	{
+	} else if (tx_channel_in[ModeSw_cnyh] == 1500) {
 		tx_channel_in[ModeSw_cnyh] = 1100;
-	}	
+	}
 }
 
 //可见光日夜切换 低无增益，中高增益，高黑白夜视
-void action_daynightsw(void)
-{
-	if (tx_channel_in[DayNightSw_cnyh] == 1100)
-	{
+void action_daynightsw(void) {
+	if (tx_channel_in[DayNightSw_cnyh] == 1100) {
 		tx_channel_in[DayNightSw_cnyh] = 1900;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[DayNightSw_cnyh] = 1100;
 	}
 }
 //镜面反转
 //1510 与1100 切换
-void action_mirrorflipsw(void)
-{
-	if (tx_channel_in[MirrorFlip_cnyh] == 1500)
-	{
+void action_mirrorflipsw(void) {
+	if (tx_channel_in[MirrorFlip_cnyh] == 1500) {
 		tx_channel_in[MirrorFlip_cnyh] = 1900;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[MirrorFlip_cnyh] = 1500;
 	}
 }
 //红外录像 1100不录像，1900录像
-void action_irvideorec(void)
-{
-	if (tx_channel_in[IrVedioRecord_cnyh] == 1100)
-	{
+void action_irvideorec(void) {
+	if (tx_channel_in[IrVedioRecord_cnyh] == 1100) {
 		tx_channel_in[IrVedioRecord_cnyh] = 1900;
-	}
-	else
-	{
+	} else {
 		tx_channel_in[IrVedioRecord_cnyh] = 1100;
 	}
-}	
+}
 //拍照需要调用重置的控制
-void action_photo_reset_start(void)
-{
+void action_photo_reset_start(void) {
 	paizhao_enabled = 1;
 	pic_return_count = TimingDelay;                   //需回位
 }
 //控制复位操作
-void action_reset_prcs(void)
-{
-	if(paizhao_enabled)
-	{
-		if (pic_return_count - TimingDelay > _TIM_RETURN)
-		{
+void action_reset_prcs(void) {
+	if (paizhao_enabled) {
+		if (pic_return_count - TimingDelay > _TIM_RETURN) {
 			tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
 			pic_return_count = TimingDelay;
 			paizhao_enabled = 0;
 		}
-	}	
+	}
 }
-//上电画面切换准备 
-int camera_standby_flag =0;
-void camera_standby(void)
-{
+//上电画面切换准备
+int camera_standby_flag = 0;
+void camera_standby(void) {
 	//10秒内将画面切换成正常
-	if(camera_standby_flag>0) //测试结果
+	if (camera_standby_flag > 0) //测试结果
 		return;
-	if (MAVLINK_TX_INIT_VAL - TimingDelay > 10000)	
-	{
-		if (camera_standby_cnt - TimingDelay > 1000)
-		{
+	if (MAVLINK_TX_INIT_VAL - TimingDelay > 10000) {
+		if (camera_standby_cnt - TimingDelay > 1000) {
 			camera_standby_cnt = TimingDelay;
 			action_mirrorflipsw();
 			camera_standby_flag++;

@@ -220,8 +220,7 @@ static unsigned sbus1_frame_delay = (1000U * 1000U) / SBUS1_DEFAULT_RATE_HZ;
 //}
 
 void
-sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
-{
+sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values) {
 	uint8_t byteindex = 1; /*Data starts one byte into the sbus frame. */
 	uint8_t offset = 0;
 	uint16_t value;
@@ -679,8 +678,7 @@ sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 /*
   set output rate of SBUS in Hz
  */
-void sbus1_set_output_rate_hz(uint16_t rate_hz)
-{
+void sbus1_set_output_rate_hz(uint16_t rate_hz) {
 	if (rate_hz > SBUS1_MAX_RATE_HZ) {
 		rate_hz = SBUS1_MAX_RATE_HZ;
 	}
