@@ -57,28 +57,25 @@ zkrt_sbus  rx_sbus;
 
 volatile uint32_t sbus_send_delay = 0XFFFFFFFF;
 
-uint16_t tx_channel_in [16]={1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500}; 
-uint16_t tx_channel_out[16]={0};  																																															
+uint16_t tx_channel_in [16] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+uint16_t tx_channel_out[16] = {0};
 
-uint16_t rx_channel_in [16]={1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500}; 
-uint16_t rx_channel_out[16]={0};  					  																																								 
+uint16_t rx_channel_in [16] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+uint16_t rx_channel_out[16] = {0};
 
-void delaytemp(uint32_t t)
-{
-	uint32_t i=0;
-	while(t--)
-	{
-		i=12000;
-		while(i--)
-		{
+void delaytemp(uint32_t t) {
+	uint32_t i = 0;
+	while (t--) {
+		i = 12000;
+		while (i--) {
 		}
 	}
 }
 //被调用情况：已经将所需的pwm值输入到channel_in里
 //用于将通道值整理到tx_sbus里
-uint8_t endbytecounter=0;
+uint8_t endbytecounter = 0;
 uint8_t tempflag = 0;
-uint8_t tempdata[3]={0x00,0x00,0x00};
+uint8_t tempdata[3] = {0x00, 0x00, 0x00};
 //uint8_t  sbus_send(void)
 //{
 //	uint8_t i=0;
@@ -86,49 +83,49 @@ uint8_t tempdata[3]={0x00,0x00,0x00};
 //	uint8_t ch_count = 0;
 //	uint8_t data_count = 0;
 //	uint8_t rels_count = 0;
-//	
-//	memset((void *)(tx_sbus.data), 0, 22);									
+//
+//	memset((void *)(tx_sbus.data), 0, 22);
 
-//  for(i=0;i<16;i++)  																					
+//  for(i=0;i<16;i++)
 //	{
 //			if(i<4||i>=5)
-//			tx_channel_out[i]=(tx_channel_in[i]-874)/5*8;				 //BY Harry		
+//			tx_channel_out[i]=(tx_channel_in[i]-874)/5*8;				 //BY Harry
 //			else
-//			tx_channel_out[i]=(tx_channel_in[i]);		
+//			tx_channel_out[i]=(tx_channel_in[i]);
 //	}
-//	
-//	tx_sbus.startbyte=0x0f; 															
+//
+//	tx_sbus.startbyte=0x0f;
 
 //	//数据的初始化
-//	temp = tx_channel_out[0];																		
-//	ch_count = 1;																								
-//	data_count = 0;																							
+//	temp = tx_channel_out[0];
+//	ch_count = 1;
+//	data_count = 0;
 
 //#if defined EIGHT_CHANNELS
-//	while (ch_count < 9)																				
+//	while (ch_count < 9)
 //#elif defined ALL_CHANNELS
-//	while (ch_count < 17)																				
-//#endif		
+//	while (ch_count < 17)
+//#endif
 //	{
-//		if ((rels_count = ch_count*11-data_count*8) < 8)					
-//																														
+//		if ((rels_count = ch_count*11-data_count*8) < 8)
+//
 //		{
-//			temp = temp | (tx_channel_out[ch_count] << rels_count); 
-//			ch_count++;																							
+//			temp = temp | (tx_channel_out[ch_count] << rels_count);
+//			ch_count++;
 //		}
-//	
-//		tx_sbus.data[data_count] = temp&0XFF;                    
-//		data_count++;																							
-//		temp >>= 8;																								
+//
+//		tx_sbus.data[data_count] = temp&0XFF;
+//		data_count++;
+//		temp >>= 8;
 //	}
-//		
+//
 //	tx_sbus.flags=0x00;
 //	tx_sbus.endbyte = 0x00;
 //	/*by Harry*/
 //	if(endbytecounter==0)
 //	{
 //		tx_sbus.endbyte=0x04;
-//		endbytecounter = 1;		
+//		endbytecounter = 1;
 //	}
 //	else if(endbytecounter==1)
 //	{
@@ -169,8 +166,7 @@ uint8_t tempdata[3]={0x00,0x00,0x00};
 //	return 0;
 //}
 void
-sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
-{
+sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values) {
 	uint8_t byteindex = 1; /*Data starts one byte into the sbus frame. */
 	uint8_t offset = 0;
 	uint16_t value;
@@ -199,65 +195,61 @@ sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values)
 		oframe[byteindex + 2] |= (value >> (16 - offset)) & 0xff;
 		offset += 11;
 	}
-	
+
 	uart1_send(oframe, SBUS_FRAME_SIZE);
 }
-uint8_t  sbus_send(void)
-{
+uint8_t  sbus_send(void) {
 	sbus1_output(0, tx_channel_in, 16);
 	return 0;
 }
 //被调用情况：接收到一个完整的sbus指令，并将其存在rx_sbus里
 //这个与上面的相反，是一种sbus转化为ch的算法
-uint8_t sbus_recv(void)
-{
-	uint8_t i=0;
+uint8_t sbus_recv(void) {
+	uint8_t i = 0;
 	uint32_t temp = 0;
 	uint8_t data_count = 0;
 	uint8_t ch_count = 0;
 	uint8_t rels_count = 0;
-	
-	memset((void *)(rx_channel_in), 0, 16);											
-	
+
+	memset((void *)(rx_channel_in), 0, 16);
+
 	//数据的初始化
-	temp = rx_sbus.data[0] | (rx_sbus.data[1]<<8);							
-	data_count = 2;																							
-	ch_count = 0;																								
-	
+	temp = rx_sbus.data[0] | (rx_sbus.data[1] << 8);
+	data_count = 2;
+	ch_count = 0;
+
 #if defined EIGHT_CHANNELS
-	while (data_count < 12)																			
+	while (data_count < 12)
 #elif defined ALL_CHANNELS
-	while (data_count < 23)																			
-#endif		
+	while (data_count < 23)
+#endif
 	{
-		while ((rels_count= data_count*8 - ch_count*11) < 11)			
-																															
+		while ((rels_count = data_count * 8 - ch_count * 11) < 11)
+
 		{
-			temp = temp | (rx_sbus.data[data_count] << rels_count); 
-			data_count++;																						
+			temp = temp | (rx_sbus.data[data_count] << rels_count);
+			data_count++;
 		}
-		
-		
-		
-		rx_channel_in[ch_count] = temp&0X7FF;                   
-		ch_count++;																							
-		temp >>= 11;																						
+
+
+
+		rx_channel_in[ch_count] = temp & 0X7FF;
+		ch_count++;
+		temp >>= 11;
 	}
-	
-	for(i=0;i<16;i++)  																					
-	{
-		rx_channel_out[i]=(rx_channel_in[i])*5/8+875;							
+
+	for (i = 0; i < 16; i++) {
+		rx_channel_out[i] = (rx_channel_in[i]) * 5 / 8 + 875;
 	}
-	
+
 	return 0;
 }
-void sbus_init(void)
-{
-	USART1_Config();	
-	tx_channel_in[Yaw_cnyh] = 1500;                       
+void sbus_init(void) {
+	USART1_Config();
+	tx_channel_in[Yaw_cnyh] = 1500;
 	tx_channel_in[Pitch_cnyh] = 1500;
-	tx_channel_in[Pic_cnyh] = 1100; 
+	tx_channel_in[Pic_cnyh] = 1100;
 	tx_channel_in[VedioRec_cnyh] = 1100;
-	tx_channel_in[Jiaoju_cnyh] = 1500; 
+	tx_channel_in[Jiaoju_cnyh] = 1500;
 	tx_channel_in[ModeSw_cnyh] = 1100;
 }
