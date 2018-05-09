@@ -14,12 +14,12 @@
 
 //enum Channel_num_threelight   //for honghu
 //{
-//	Yaw_cnyh = 0, 
-//	Pitch_cnyh, 
+//	Yaw_cnyh = 0,
+//	Pitch_cnyh,
 //	None3_cnyh,
 //	None4_cnyh,
 //	VedioRecPic_cnyh,
-//	ModeSw_cnyh, 
+//	ModeSw_cnyh,
 //	IrColorSw_cnyh,
 //	MirrorFlip_cnyh,
 //	Jiaoju_cnyh,
@@ -28,12 +28,11 @@
 //	DayNightSw_cnyh
 //};
 
-enum Channel_num_threelight   //for yunhan
-{
-	Yaw_cnyh = 0, 
-	Pitch_cnyh, 
+enum Channel_num_threelight { //for yunhan
+	Yaw_cnyh = 0,
+	Pitch_cnyh,
 	None3_cnyh,
-	Jiaoju_cnyh,	
+	Jiaoju_cnyh,
 	DayNightSw_cnyh,
 	ModeSw_cnyh,
 	GyroCalibration_cnyh,
@@ -43,8 +42,7 @@ enum Channel_num_threelight   //for yunhan
 };
 
 #pragma pack(push, 1)
-typedef struct _zkrt_sbus
-{
+typedef struct _zkrt_sbus {
 	uint8_t   startbyte;
 	uint8_t   data[22];
 	uint8_t   flags;
@@ -66,5 +64,5 @@ uint8_t sbus_send(void);
 uint8_t sbus_recv(void);
 void sbus_init(void);
 
-#endif 
+#endif
 

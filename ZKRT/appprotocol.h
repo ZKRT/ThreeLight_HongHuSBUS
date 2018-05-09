@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    appprotocol.h 
+  * @file    appprotocol.h
   * @author  ZKRT
   * @version V1.0
   * @date    9-May-2017
-  * @brief   
+  * @brief
 	*					 + (1) init
   ******************************************************************************
   * @attention
@@ -13,29 +13,28 @@
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __APPPROTOCOL_H
-#define __APPPROTOCOL_H 
+#define __APPPROTOCOL_H
 /* Includes ------------------------------------------------------------------*/
 #include "zkrt.h"
 /* Exported macro ------------------------------------------------------------*/
 
 //version and model string
 #define DEV_MODEL              "Q30TIR-H"
-#define DEV_HW                 "010000"
-#define DEV_SW                 "010000"
+#define DEV_HW                 "000400"
+#define DEV_SW                 "000201"
 //
 #define CTRL_INIT_ENABLE       1
 /* Exported constants --------------------------------------------------------*/
 //type num enum
-typedef enum
-{
-	TN_None =0,
+typedef enum {
+	TN_None = 0,
 	TN_HEARTBEAT,
 	TN_GETDEVINFO,
 	TN_MAX
-}TypeNumEnum;
+} TypeNumEnum;
 //hb flag
 #define TNHB_FLAG                     0xaabbccdd
 #define THHB_FIXED_LEN                5
@@ -43,28 +42,24 @@ typedef enum
 #pragma pack(1)
 ///////////////////////////////subdev to uav zkrt data struct
 //////common command
-typedef struct
-{
+typedef struct {
 	u8 type_num;
-	u8 type_data[ZK_DATA_MAX_LEN-1];
-}common_data_plst;
+	u8 type_data[ZK_DATA_MAX_LEN - 1];
+} common_data_plst;
 //heartbeat data
-typedef struct
-{
+typedef struct {
 	u32 hb_flag;
-	u8 hb_data[ZK_DATA_MAX_LEN-THHB_FIXED_LEN];
-}common_hbd_plst;
+	u8 hb_data[ZK_DATA_MAX_LEN - THHB_FIXED_LEN];
+} common_hbd_plst;
 //dev info data
-typedef struct
-{
+typedef struct {
 	u8 status;
 	u8 model[10];
 	u8 hw_version[6];
 	u8 sw_version[6];
-}common_get_devinfo_plst;
+} common_get_devinfo_plst;
 //////normal command
-typedef struct
-{
+typedef struct {
 	u16 yaw;
 	u16 pitch;
 	u8 reserved1[4];
@@ -80,9 +75,8 @@ typedef struct
 	u16 ir_zoom;
 	u8 reserved3[5];
 	u8 init_status;
-}normal_plst_mti;
-typedef struct
-{
+} normal_plst_mti;
+typedef struct {
 	u16 yaw;
 	u16 pitch;
 	u8 reserved1[8];
@@ -96,18 +90,18 @@ typedef struct
 	u8 electricImageStabilizin;
 	u8 reserved4[2];
 	u8 init_status;
-}normal_plst_q30tirh;
+} normal_plst_q30tirh;
 ///////////////////////////////
-#pragma pack() 
+#pragma pack()
 /* Exported functions ------------------------------------------------------- */
 #endif /* __APPCAN_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
   */
-	
+
 /************************ (C) COPYRIGHT ZKRT *****END OF FILE****/
 
