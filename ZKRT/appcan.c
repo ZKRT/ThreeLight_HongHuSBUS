@@ -31,8 +31,8 @@ recv_zkrt_packet_handlest recv_handle = {0};
 zkrt_packet_t *recv_pcket = &recv_handle.packet;
 msg_handle_st recv_respond_msg;
 //control handle
-normal_plst_mti runtime_ctrl;
-normal_plst_mti last_ctrl;
+normal_plst_mq30tir runtime_ctrl;
+normal_plst_mq30tir last_ctrl;
 /* Private functions ---------------------------------------------------------*/
 static void app_can_recv_handle(void);
 static u8 common_data_handle(const zkrt_packet_t *spacket, zkrt_packet_t *respond_packet);
@@ -185,7 +185,8 @@ static u8 normal_data_handle(const zkrt_packet_t *spacket) {
 		tx_channel_in[Yaw_cnyh] = runtime_ctrl.yaw;
 		tx_channel_in[Pitch_cnyh] = 3000 - runtime_ctrl.pitch;
 		tx_channel_in[Jiaoju_cnyh] = runtime_ctrl.zoom;
-		tx_channel_in[IrJiaojuSw_cnyh] = runtime_ctrl.ir_zoom;
+		tx_channel_in[GimbalSpeed_cnyh] = runtime_ctrl.gimbalspeed;
+		tx_channel_in[MultiTrace_cnyh] = runtime_ctrl.multitrace;
 		if (cmd_count - TimingDelay > _TIM_CMD_INTERNEL) { //在1秒内多次控制无效
 			cmd_count = TimingDelay;
 			if (runtime_ctrl.photo != last_ctrl.photo) {
@@ -194,21 +195,15 @@ static u8 normal_data_handle(const zkrt_packet_t *spacket) {
 			}
 			if (runtime_ctrl.record != last_ctrl.record) {
 				action_shexiang();
+				action_photo_reset_start();
 			}
 			if (runtime_ctrl.color != last_ctrl.color) {
 				action_ircolorsw();
+				action_focus_reset_start();
 			}
-			if (runtime_ctrl.daynight != last_ctrl.daynight) {
-				action_daynightsw();
-			}
-			if (runtime_ctrl.gimbal_mode != last_ctrl.gimbal_mode) {
-				action_modesw();
-			}
-			if (runtime_ctrl.ir_record != last_ctrl.ir_record) {
-				action_irvideorec();
-			}
-			if (runtime_ctrl.mirrorflip != last_ctrl.mirrorflip) {
-				action_mirrorflipsw();
+			if (runtime_ctrl.focus != last_ctrl.focus) {
+				action_focussw();
+				action_focus_reset_start();
 			}
 		}
 	}

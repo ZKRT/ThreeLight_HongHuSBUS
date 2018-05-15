@@ -7,39 +7,22 @@
 //sbus value
 #define PIC_VSBUS           1100
 #define REC_VSBUS           1900
-#define CAMERA_NONE_VSBUS   1510
+#define CAMERA_NONE_VSBUS   1500
+#define PIP_VSBUS           1900
+#define COLOR_VSBUS         1100
 #define IRZOOM_0X_VSBUS     850
 #define IRZOOM_2X_VSBUS     2000
 #define IRZOOM_4X_VSBUS     2150
 
-enum Channel_num_threelight { //for honghu
+enum Channel_num_threelight {
 	Yaw_cnyh = 0,
 	Pitch_cnyh,
-	None3_cnyh,
-	None4_cnyh,
 	VedioRecPic_cnyh,
-	ModeSw_cnyh,
-	IrColorSw_cnyh,
-	MirrorFlip_cnyh,
-	Jiaoju_cnyh,
-	IrVedioRecord_cnyh,
-	IrJiaojuSw_cnyh,
-	DayNightSw_cnyh
+	GimbalSpeed_cnyh,
+	FocusColor_cnyh,
+	MultiTrace_cnyh,
+	Jiaoju_cnyh
 };
-
-//enum Channel_num_threelight   //for yunhan
-//{
-//	Yaw_cnyh = 0,
-//	Pitch_cnyh,
-//	None3_cnyh,
-//	Jiaoju_cnyh,
-//	DayNightSw_cnyh,
-//	ModeSw_cnyh,
-//	GyroCalibration_cnyh,
-//	None4_cnyh,
-//	Defog_cnyh,
-//	ElectricImageStabilizing_cnyh
-//};
 
 #pragma pack(push, 1)
 typedef struct _zkrt_sbus {

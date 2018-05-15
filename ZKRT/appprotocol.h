@@ -22,9 +22,9 @@
 /* Exported macro ------------------------------------------------------------*/
 
 //version and model string //zkrt_notice
-#define DEV_MODEL              "M-TI"
+#define DEV_MODEL              "M-Q30TIR"
 #define DEV_HW                 "000400"
-#define DEV_SW                 "000202"
+#define DEV_SW                 "000100"
 //
 #define CTRL_INIT_ENABLE       1
 /* Exported constants --------------------------------------------------------*/
@@ -59,6 +59,38 @@ typedef struct {
 	u8 sw_version[6];
 } common_get_devinfo_plst;
 //////normal command
+//typedef struct {
+//	u16 yaw;
+//	u16 pitch;
+//	u8 reserved1[4];
+//	u16 photo;
+//	u16 record;
+//	u16 zoom;
+//	u8 reserved2[3];
+//	u8 color;
+//	u8 gimbal_mode;
+//	u8 daynight;
+//	u8 mirrorflip;
+//	u8 ir_record;
+//	u16 ir_zoom;
+//	u8 reserved3[5];
+//	u8 init_status;
+//} normal_plst_mti;
+//typedef struct {
+//	u16 yaw;
+//	u16 pitch;
+//	u8 reserved1[6];
+//	u16 zoom;
+//	u8 reserved2[4];
+//	u8 gimbal_mode;
+//	u8 daynight;
+//	u8 reserved3[3];
+//	u8 gyroCalibration;
+//	u8 defog;
+//	u8 electricImageStabilizin;
+//	u8 reserved4[2];
+//	u8 init_status;
+//} normal_plst_q30tirh;
 typedef struct {
 	u16 yaw;
 	u16 pitch;
@@ -66,31 +98,13 @@ typedef struct {
 	u16 photo;
 	u16 record;
 	u16 zoom;
-	u8 reserved2[3];
+	u16 gimbalspeed;
+	u8 focus;
 	u8 color;
-	u8 gimbal_mode;
-	u8 daynight;
-	u8 mirrorflip;
-	u8 ir_record;
-	u16 ir_zoom;
-	u8 reserved3[5];
+	u8 reserved2[9];
+	u16 multitrace;
 	u8 init_status;
-} normal_plst_mti;
-typedef struct {
-	u16 yaw;
-	u16 pitch;
-	u8 reserved1[6];
-	u16 zoom;
-	u8 reserved2[4];
-	u8 gimbal_mode;
-	u8 daynight;
-	u8 reserved3[3];
-	u8 gyroCalibration;
-	u8 defog;
-	u8 electricImageStabilizin;
-	u8 reserved4[2];
-	u8 init_status;
-} normal_plst_q30tirh;
+} normal_plst_mq30tir;
 ///////////////////////////////
 #pragma pack()
 /* Exported functions ------------------------------------------------------- */

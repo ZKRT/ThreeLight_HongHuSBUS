@@ -246,25 +246,18 @@ uint8_t sbus_recv(void) {
 }
 void sbus_init(void) {
 	USART1_Config();
-	/*honghu init value*/
-//	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
-//	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
-//	tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;       //ok, 1900录像，1510无动作，1100拍照
-//	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 1510跟随，1900锁头，1100回中
-//	tx_channel_in[IrColorSw_cnyh] = 1100;                      //ok, 1510以下黑热，1520以上白热，1515铁红
-//	tx_channel_in[MirrorFlip_cnyh] = 1510;                     //ok, 1510 与1100 切换
-//	tx_channel_in[Jiaoju_cnyh] = 1000;                         //ok, 1000~2000渐扩大焦距
-//	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
-//	tx_channel_in[IrJiaojuSw_cnyh] = IRZOOM_0X_VSBUS;          //ok, 1210-4x, 1300-2x , 1600-0x
-//	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜
-	tx_channel_in[Yaw_cnyh] = 1500;                            //ok
-	tx_channel_in[Pitch_cnyh] = 1500;	                         //ok
-	tx_channel_in[ModeSw_cnyh] = 1100;                         //ok, 1510跟随，1900锁头，1100回中
-	tx_channel_in[DayNightSw_cnyh] = 1100;                     //ok, 1100白天，1900黑夜
-	tx_channel_in[MirrorFlip_cnyh] = 1900;                     //ok, 1900 与1500 切换
-	tx_channel_in[IrColorSw_cnyh] = 1100;                      //ok, 1100黑热，1510白热，1600铁红
-	tx_channel_in[Jiaoju_cnyh] = 850;                         //ok, 850~2150渐扩大焦距
-	tx_channel_in[IrJiaojuSw_cnyh] = 850;                     //ok, 850-0x, 1000~2000-2x , 2150-4x
-	tx_channel_in[VedioRecPic_cnyh] = 1510;                   //ok, 1900录像，1510无动作，1100拍照
-	tx_channel_in[IrVedioRecord_cnyh] = 1100;                  //ok, 1100不录像，1900录像
+	tx_channel_in[Yaw_cnyh] = 1500;
+//- left, + right, = stop	
+	tx_channel_in[Pitch_cnyh] = 1500;	
+//- up, + down, = stop		
+	tx_channel_in[GimbalSpeed_cnyh] = 1500;  
+//- slow, + fast, = to + (twice) is 回中
+	tx_channel_in[MultiTrace_cnyh] = 1000;    
+//
+	tx_channel_in[Jiaoju_cnyh] = 1500;     
+//-zoom in, + zoom out, = stop
+	tx_channel_in[VedioRecPic_cnyh] = 1500;      
+//= to + is start record, = to - is photo
+	tx_channel_in[FocusColor_cnyh] = 1500;  
+//= to + is 画中画, = to - is color
 }

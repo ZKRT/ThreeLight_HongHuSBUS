@@ -31,7 +31,6 @@ int main() {
 #ifdef KEY_TEST_FUN
 		KEY_Rock();
 #endif
-		camera_standby();
 		appcan_prcs();
 		action_reset_prcs();
 		if (_10ms_count - TimingDelay >= 10) {
@@ -57,7 +56,7 @@ int main() {
 		if (led_tx_count - TimingDelay > 50) {
 			GPIO_SetBits(GPIOB, GPIO_Pin_6);
 		}
-		if (sbus_send_delay - TimingDelay > 14) {
+		if (sbus_send_delay - TimingDelay > _TIM_SBUS) {
 			sbus_send();
 			sbus_send_delay = TimingDelay;
 		}
