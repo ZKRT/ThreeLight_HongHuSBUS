@@ -22,7 +22,7 @@
 /* Exported macro ------------------------------------------------------------*/
 
 //version and model string
-#define DEV_MODEL              "Q30TIR-H"
+#define DEV_MODEL              "M-NEO1N"
 #define DEV_HW                 "000400"
 #define DEV_SW                 "000201"
 //
