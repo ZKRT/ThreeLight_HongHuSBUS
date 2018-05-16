@@ -19,6 +19,7 @@ void bsp_init(void) {
 	CAN_Mode_Init(CAN_Mode_Normal);//CAN初始化环回模式,波特率1Mbps
 	TIM_Init();
 	sbus_init();
+	pwm_init();
 #ifdef KEY_TEST_FUN
 	KEY_Init();
 #endif
@@ -56,9 +57,11 @@ int main() {
 		if (led_tx_count - TimingDelay > 50) {
 			GPIO_SetBits(GPIOB, GPIO_Pin_6);
 		}
+#ifdef USE_SBUS			
 		if (sbus_send_delay - TimingDelay > _TIM_SBUS) {
 			sbus_send();
 			sbus_send_delay = TimingDelay;
 		}
+#endif		
 	}
 }

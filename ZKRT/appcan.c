@@ -20,6 +20,7 @@
 #include "camera.h"
 #include "sbus.h"
 #include "appcan.h"
+#include "pwm.h"
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 //heartbeat handle
@@ -206,6 +207,13 @@ static u8 normal_data_handle(const zkrt_packet_t *spacket) {
 				action_focus_reset_start();
 			}
 		}
+		PWM_SET(Pitch_cnyh, tx_channel_in[Pitch_cnyh]);
+		PWM_SET(Yaw_cnyh, tx_channel_in[Yaw_cnyh]);
+		PWM_SET(GimbalSpeed_cnyh, tx_channel_in[GimbalSpeed_cnyh]);
+		PWM_SET(Jiaoju_cnyh, tx_channel_in[Jiaoju_cnyh]);
+		PWM_SET(FocusColor_cnyh, tx_channel_in[FocusColor_cnyh]);
+		PWM_SET(VedioRecPic_cnyh, tx_channel_in[VedioRecPic_cnyh]);
+		PWM_SET(MultiTrace_cnyh, tx_channel_in[MultiTrace_cnyh]);
 	}
 	//mask last ctrl
 	last_ctrl = runtime_ctrl;

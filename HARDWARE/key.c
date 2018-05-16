@@ -1,6 +1,7 @@
 #include "key.h"
 #include "sbus.h"
 #include "camera.h"
+#include "pwm.h"
 
 #ifdef KEY_TEST_FUN
 //按键初始化函数
@@ -56,19 +57,42 @@ void KEY_Rock(void) {
 	if (key_value == KEY_DEFAULT) {
 		return;
 	}
-
 	switch (key_value) {
 	case KEY1_PRES:
-//			action_mirrorflipsw();
-//			tx_channel_in[VedioRecPic_cnyh] = 1100;
+//		tx_channel_in[Yaw_cnyh]         = 1100;
+//		tx_channel_in[Pitch_cnyh]       = 1100;
+//		tx_channel_in[GimbalSpeed_cnyh] = 1100;
+//		tx_channel_in[MultiTrace_cnyh]  = 1100;
+//		tx_channel_in[Jiaoju_cnyh]      = 1100;
+//		tx_channel_in[VedioRecPic_cnyh] = 1100;
+//		tx_channel_in[FocusColor_cnyh]  = 1100;
 		break;
 	case KEY2_PRES:
-//			tx_channel_in[VedioRecPic_cnyh] = 850;
+//		tx_channel_in[Yaw_cnyh]         = 1500;
+//		tx_channel_in[Pitch_cnyh]       = 1500;
+//		tx_channel_in[GimbalSpeed_cnyh] = 1500;
+//		tx_channel_in[MultiTrace_cnyh]  = 1500;
+//		tx_channel_in[Jiaoju_cnyh]      = 1500;
+//		tx_channel_in[VedioRecPic_cnyh] = 1500;
+//		tx_channel_in[FocusColor_cnyh]  = 1500;
 		break;
 	case KEY3_PRES:
-//			tx_channel_in[VedioRecPic_cnyh] = 1510;
+//		tx_channel_in[Yaw_cnyh]         = 1900;
+//		tx_channel_in[Pitch_cnyh]       = 1900;
+//		tx_channel_in[GimbalSpeed_cnyh] = 1900;
+//		tx_channel_in[MultiTrace_cnyh]  = 1900;
+//		tx_channel_in[Jiaoju_cnyh]      = 1900;
+//		tx_channel_in[VedioRecPic_cnyh] = 1900;
+//		tx_channel_in[FocusColor_cnyh]  = 1900;
 		break;
 	}
+//	PWM_SET(Pitch_cnyh, tx_channel_in[Pitch_cnyh]);
+//	PWM_SET(Yaw_cnyh, tx_channel_in[Yaw_cnyh]);
+//	PWM_SET(GimbalSpeed_cnyh, tx_channel_in[GimbalSpeed_cnyh]);
+//	PWM_SET(Jiaoju_cnyh, tx_channel_in[Jiaoju_cnyh]);
+//	PWM_SET(FocusColor_cnyh, tx_channel_in[FocusColor_cnyh]);
+//	PWM_SET(VedioRecPic_cnyh, tx_channel_in[VedioRecPic_cnyh]);
+//	PWM_SET(MultiTrace_cnyh, tx_channel_in[MultiTrace_cnyh]);
 }
 #endif
 

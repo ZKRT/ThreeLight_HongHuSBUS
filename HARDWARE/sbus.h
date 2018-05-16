@@ -3,6 +3,7 @@
 
 #include "sys.h"
 
+//#define USE_SBUS
 
 //sbus value
 #define PIC_VSBUS           1100
@@ -15,13 +16,13 @@
 #define IRZOOM_4X_VSBUS     2150
 
 enum Channel_num_threelight {
-	Yaw_cnyh = 0,
-	Pitch_cnyh,
-	VedioRecPic_cnyh,
+	Pitch_cnyh = 1,
+	Yaw_cnyh,
 	GimbalSpeed_cnyh,
+	Jiaoju_cnyh,
 	FocusColor_cnyh,
+	VedioRecPic_cnyh,
 	MultiTrace_cnyh,
-	Jiaoju_cnyh
 };
 
 #pragma pack(push, 1)

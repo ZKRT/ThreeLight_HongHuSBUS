@@ -60,6 +60,7 @@ void action_reset_prcs(void) {
 	if (paizhao_enabled) {
 		if (pic_return_count - TimingDelay > _TIM_RETURN) {
 			tx_channel_in[VedioRecPic_cnyh] = CAMERA_NONE_VSBUS;
+			PWM_SET(VedioRecPic_cnyh, tx_channel_in[VedioRecPic_cnyh]);
 			pic_return_count = TimingDelay;
 			paizhao_enabled = 0;
 		}
@@ -67,6 +68,7 @@ void action_reset_prcs(void) {
 	if (focus_enabled) {
 		if (focus_return_count - TimingDelay > _TIM_RETURN) {
 			tx_channel_in[FocusColor_cnyh] = 1500;
+			PWM_SET(FocusColor_cnyh, tx_channel_in[FocusColor_cnyh]);
 			focus_return_count = TimingDelay;
 			focus_enabled = 0;
 		}

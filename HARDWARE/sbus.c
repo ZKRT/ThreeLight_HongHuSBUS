@@ -12,7 +12,7 @@ zkrt_sbus  rx_sbus;
 
 #define SBUS_START_SYMBOL	0x0f
 
-#define SBUS_INPUT_CHANNELS	16
+#define SBUS_INPUT_CHANNELS	16 //zkrt_debug
 #define SBUS_FLAGS_BYTE		23
 #define SBUS_FAILSAFE_BIT	3
 #define SBUS_FRAMELOST_BIT	2
@@ -76,95 +76,6 @@ void delaytemp(uint32_t t) {
 uint8_t endbytecounter = 0;
 uint8_t tempflag = 0;
 uint8_t tempdata[3] = {0x00, 0x00, 0x00};
-//uint8_t  sbus_send(void)
-//{
-//	uint8_t i=0;
-//	uint32_t temp = 0;
-//	uint8_t ch_count = 0;
-//	uint8_t data_count = 0;
-//	uint8_t rels_count = 0;
-//
-//	memset((void *)(tx_sbus.data), 0, 22);
-
-//  for(i=0;i<16;i++)
-//	{
-//			if(i<4||i>=5)
-//			tx_channel_out[i]=(tx_channel_in[i]-874)/5*8;				 //BY Harry
-//			else
-//			tx_channel_out[i]=(tx_channel_in[i]);
-//	}
-//
-//	tx_sbus.startbyte=0x0f;
-
-//	//数据的初始化
-//	temp = tx_channel_out[0];
-//	ch_count = 1;
-//	data_count = 0;
-
-//#if defined EIGHT_CHANNELS
-//	while (ch_count < 9)
-//#elif defined ALL_CHANNELS
-//	while (ch_count < 17)
-//#endif
-//	{
-//		if ((rels_count = ch_count*11-data_count*8) < 8)
-//
-//		{
-//			temp = temp | (tx_channel_out[ch_count] << rels_count);
-//			ch_count++;
-//		}
-//
-//		tx_sbus.data[data_count] = temp&0XFF;
-//		data_count++;
-//		temp >>= 8;
-//	}
-//
-//	tx_sbus.flags=0x00;
-//	tx_sbus.endbyte = 0x00;
-//	/*by Harry*/
-//	if(endbytecounter==0)
-//	{
-//		tx_sbus.endbyte=0x04;
-//		endbytecounter = 1;
-//	}
-//	else if(endbytecounter==1)
-//	{
-//		tx_sbus.endbyte=0x14;
-//		endbytecounter = 2;
-//	}
-//	else if(endbytecounter==2)
-//	{
-//		tx_sbus.endbyte=0x24;
-//		endbytecounter = 3;
-//	}
-//	else if(endbytecounter==3)
-//	{
-//		tx_sbus.endbyte=0x34;
-//		endbytecounter = 0;
-//	}
-//	uart1_send((uint8_t *)&tx_sbus, sizeof(tx_sbus));
-////	if(tx_sbus.endbyte==0x04)
-////	{
-////		delaytemp(2);
-////		if(tempflag==0)
-////		{
-////			tempdata[0]=0x03;
-////			tempdata[1]=0xC4;
-////			tempdata[2]=0x00;
-////			tempflag = 1;
-////		}
-////		else
-////		{
-////			tempdata[0]=0x03;
-////			tempdata[1]=0xC0;
-////			tempdata[2]=0x33;
-////			tempflag = 0;
-////		}
-////		uart1_send((uint8_t *)&tempdata, sizeof(tempdata));
-////	}
-//	/*end buy Harry*/
-//	return 0;
-//}
 void
 sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values) {
 	uint8_t byteindex = 1; /*Data starts one byte into the sbus frame. */
@@ -199,7 +110,7 @@ sbus1_output(int sbus_fd, uint16_t *values, uint16_t num_values) {
 	uart1_send(oframe, SBUS_FRAME_SIZE);
 }
 uint8_t  sbus_send(void) {
-	sbus1_output(0, tx_channel_in, 16);
+	sbus1_output(0, tx_channel_in, SBUS_INPUT_CHANNELS);
 	return 0;
 }
 //被调用情况：接收到一个完整的sbus指令，并将其存在rx_sbus里
