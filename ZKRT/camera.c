@@ -32,7 +32,7 @@ void action_shexiang(void) {
 //画中画
 void action_focussw(void) {
 	if (tx_channel_in[FocusColor_cnyh] == 1500) {
-		tx_channel_in[FocusColor_cnyh] = 1900;
+		tx_channel_in[FocusColor_cnyh] = 1100;
 	} else {
 		tx_channel_in[FocusColor_cnyh] = 1500;
 	}
@@ -40,7 +40,7 @@ void action_focussw(void) {
 //颜色切换
 void action_ircolorsw(void) {
 	if (tx_channel_in[FocusColor_cnyh] == 1500) {
-		tx_channel_in[FocusColor_cnyh] = 1100;
+		tx_channel_in[FocusColor_cnyh] = 1900;
 	} else {
 		tx_channel_in[FocusColor_cnyh] = 1500;
 	}
@@ -53,7 +53,7 @@ void action_photo_reset_start(void) {
 //画中画和颜色需要调用重置的控制
 void action_focus_reset_start(void) {
 	focus_enabled = 1;
-	focus_enabled = TimingDelay;                   //需回位
+	focus_return_count = TimingDelay;                   //需回位
 }
 //控制复位操作
 void action_reset_prcs(void) {
